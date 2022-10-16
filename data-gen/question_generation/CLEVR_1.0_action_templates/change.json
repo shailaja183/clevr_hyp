@@ -1,0 +1,274 @@
+[
+    {
+        "text":
+        [
+            "Change the color of <Z2> <C2> <M2> <S2>s to <C>.",
+            "Make <Z2> <C2> <M2> <S2>'s color <C>.",
+            "There are <Z2> <C2> <M2> <S2>(s); They transforms into <C> color.",
+            "All <Z2> <C2> <M2> <S2>s become <C>."
+        ],
+        "nodes":
+        [
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "side_inputs":
+                [
+                    "<Z2>",
+                    "<C2>",
+                    "<M2>",
+                    "<S2>"
+                ],
+                "inputs":
+                [
+                    0
+                ],
+                "type": "filter"
+            },
+            {
+                "side_inputs":
+                [
+                    "<C>"
+                ],
+                "inputs":
+                [
+                    2
+                ],
+                "type": "change_color"
+            }
+        ],
+        "params":
+        [
+            {
+                "type": "Size",
+                "name": "<Z2>"
+            },
+            {
+                "type": "Color",
+                "name": "<C2>"
+            },
+            {
+                "type": "Material",
+                "name": "<M2>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S2>"
+            },
+            {
+                "type": "Color",
+                "name": "<C>"
+            }
+        ],
+        "constraints":
+        [
+        ]
+    },
+    {
+        "text":
+        [
+            "Change the shape of <Z2> <C2> <M2> <S2>s to <S>.",
+            "Make <Z2> <C2> <M2> <S2>'s shape <S>.",
+            "There is a <Z2> <C2> <M2> <S2>; It transforms into <S> shape.",
+            "All <Z2> <C2> <M2> <S2>s become <S>."
+        ],
+        "nodes":
+        [
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "side_inputs":
+                [
+                    "<Z2>",
+                    "<C2>",
+                    "<M2>",
+                    "<S2>"
+                ],
+                "inputs":
+                [
+                    0
+                ],
+                "type": "filter"
+            },
+            {
+                "side_inputs":
+                [
+                    "<S>"
+                ],
+                "inputs":
+                [
+                    2
+                ],
+                "type": "change_shape"
+            }
+        ],
+        "params":
+        [
+            {
+                "type": "Size",
+                "name": "<Z2>"
+            },
+            {
+                "type": "Color",
+                "name": "<C2>"
+            },
+            {
+                "type": "Material",
+                "name": "<M2>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S2>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S>"
+            }
+        ],
+        "constraints":
+        [
+        ]
+    },
+    {
+        "text":
+        [
+            "Change the material of <Z2> <C2> <M2> <S2>s to <M>.",
+            "Make <Z2> <C2> <M2> <S2>'s material <M>.",
+            "There is a <Z2> <C2> <M2> <S2>; It transforms into <M> material.",
+            "All <Z2> <C2> <M2> <S2>s become <M>."
+        ],
+        "nodes":
+        [
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "side_inputs":
+                [
+                    "<Z2>",
+                    "<C2>",
+                    "<M2>",
+                    "<S2>"
+                ],
+                "inputs":
+                [
+                    0
+                ],
+                "type": "filter"
+            },
+            {
+                "side_inputs":
+                [
+                    "<M>"
+                ],
+                "inputs":
+                [
+                    2
+                ],
+                "type": "change_material"
+            }
+        ],
+        "params":
+        [
+            {
+                "type": "Size",
+                "name": "<Z2>"
+            },
+            {
+                "type": "Color",
+                "name": "<C2>"
+            },
+            {
+                "type": "Material",
+                "name": "<M2>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S2>"
+            },
+            {
+                "type": "Material",
+                "name": "<M>"
+            }
+        ],
+        "constraints":
+        [
+        ]
+    },
+    {
+        "text":
+        [
+            "Change the size of <Z2> <C2> <M2> <S2>s to <Z>.",
+            "Make <Z2> <C2> <M2> <S2>'s size <Z>.",
+            "There is a <Z2> <C2> <M2> <S2>; It transforms into <Z> size.",
+            "All <Z2> <C2> <M2> <S2>s become <Z>."
+        ],
+        "nodes":
+        [
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "side_inputs":
+                [
+                    "<Z2>",
+                    "<C2>",
+                    "<M2>",
+                    "<S2>"
+                ],
+                "inputs":
+                [
+                    0
+                ],
+                "type": "filter"
+            },
+            {
+                "side_inputs":
+                [
+                    "<Z>"
+                ],
+                "inputs":
+                [
+                    2
+                ],
+                "type": "change_size"
+            }
+        ],
+        "params":
+        [
+            {
+                "type": "Size",
+                "name": "<Z2>"
+            },
+            {
+                "type": "Color",
+                "name": "<C2>"
+            },
+            {
+                "type": "Material",
+                "name": "<M2>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S2>"
+            },
+            {
+                "type": "Size",
+                "name": "<Z>"
+            }
+        ],
+        "constraints":
+        [
+        ]
+    }
+]

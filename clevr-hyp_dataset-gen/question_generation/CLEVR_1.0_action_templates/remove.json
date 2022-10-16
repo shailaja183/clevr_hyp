@@ -1,0 +1,55 @@
+[
+    {
+        "text":
+        [
+            "Remove <Z> <C> <M> <S>s from the scene.",
+            "Remove all <Z> <C> <M> <S>s.",
+            "All <Z> <C> <M> <S>s disappear from the scene.",
+            "Take out <Z> <C> <M> <S>s from the scene.",
+            "All <Z> <C> <M> <S>s are withdrawn from the scene.",
+            "Hide all <Z> <C> <M> <S>s."
+        ],
+        "nodes":
+        [
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "inputs":
+                [
+                    0,
+                    1
+                ],
+                "type": "remove_abs"
+            }
+        ],
+        "params":
+        [
+            {
+                "type": "Size",
+                "name": "<Z>"
+            },
+            {
+                "type": "Color",
+                "name": "<C>"
+            },
+            {
+                "type": "Material",
+                "name": "<M>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S>"
+            }
+        ],
+        "constraints":
+        []
+    }
+]
