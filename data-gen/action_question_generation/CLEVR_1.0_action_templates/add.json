@@ -1,0 +1,55 @@
+[
+    {
+        "text":
+        [
+            "Add a <Z> <C> <M> <S> to the scene.",
+            "Add a <Z> <C> <M> <S>.",
+            "Insert a <Z> <C> <M> <S> to the scene.",
+            "Insert a <Z> <C> <M> <S>.",
+            "Put a new <Z> <C> <M> <S> object into the scene.",
+            "Place a new <Z> <C> <M> <S> object into the scene."
+        ],
+        "nodes":
+        [
+            {
+                "inputs":
+                [],
+                "type": "scene"
+            },
+            {
+                "inputs":
+                [],
+                "type": "object"
+            },
+            {
+                "inputs":
+                [
+                    0,
+                    1
+                ],
+                "type": "add_abs"
+            }
+        ],
+        "params":
+        [
+            {
+                "type": "Size",
+                "name": "<Z>"
+            },
+            {
+                "type": "Color",
+                "name": "<C>"
+            },
+            {
+                "type": "Material",
+                "name": "<M>"
+            },
+            {
+                "type": "Shape",
+                "name": "<S>"
+            }
+        ],
+        "constraints":
+        []
+    }
+]
