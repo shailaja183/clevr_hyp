@@ -1,35 +1,6 @@
 # Neural-Symbolic Visual Question Answering (NS-VQA)
 
-Pytorch implementation for Neural-Symbolic Visual Question Answering (NS-VQA) on the [CLEVR dataset](https://cs.stanford.edu/people/jcjohns/clevr/). 
-
-<div align="center">
-  <img src="img/model.png" width="750px">
-</div>
-
-### Publication
-**[Neural-Symbolic VQA: Disentangling Reasoning from Vision and Language Understanding](https://arxiv.org/abs/1810.02338)**
-<br>
-Kexin Yi&ast;, 
-[Jiajun Wu](https://jiajunwu.com/)&ast;, 
-[Chuang Gan](http://people.csail.mit.edu/ganchuang/), 
-[Pushmeet Kohli](https://sites.google.com/site/pushmeet/), 
-[Antonio Torralba](http://web.mit.edu/torralba/www/), and
-[Joshua B. Tenenbaum](https://web.mit.edu/cocosci/josh.html)
-<br>
-(* indicates equal contributions)
-<br>
-In Neural Information Processing Systems (*NeurIPS*) 2018.
-<br>
-
-```
-@inproceedings{yi2018neural,
-  title={Neural-symbolic vqa: Disentangling reasoning from vision and language understanding},
-  author={Yi, Kexin and Wu, Jiajun and Gan, Chuang and Torralba, Antonio and Kohli, Pushmeet and Tenenbaum, Joshua B.},
-  booktitle={Advances in Neural Information Processing Systems},
-  pages={1039--1050},
-  year={2018}
-}
-```
+Pytorch implementation for Neural-Symbolic Visual Question Answering (NS-VQA) on the [CLEVR_HYP dataset]
 
 ## Prerequisites
 * Linux Ubuntu 16.04
@@ -39,15 +10,15 @@ In Neural Information Processing Systems (*NeurIPS*) 2018.
 
 ## Getting started
 
-Clone this repository 
+Clone the repository (which we have adapted and modified to evaluate CLEVR_HYP)
 ```
 git clone https://github.com/kexinyi/ns-vqa.git
 ```
 
 Create an environment with all packages from `requirements.txt` installed (Note: please double check the CUDA version on your machine and install pytorch accordingly)
 ```
-conda create --name ns-vqa -c conda-forge pytorch --file requirements.txt
-source activate ns-vqa
+conda create --name ns-vqa_ch -c conda-forge pytorch --file requirements.txt
+source activate ns-vqa_ch
 ```
 
 Download data and pretrained model
@@ -128,7 +99,7 @@ The output file `{repo_root}/data/attr_net/results/clevr_val_scenes_parsed_pretr
 
 ### Step 3: reasoning
 
-We are now ready to perform reasoning. The model first parses the questions into programs, and then run the logic of the programs on the abstract scene representations.
+We are now ready to perform reasoning. The model first parses the questions into programs, actions into programs and then run the logic of the programs on the abstract scene representations.
 ```
 cd {repo_root}/reason
 ```
@@ -200,20 +171,48 @@ cd {repo_root}/reason
 ```
 python tools/sample_questions.py \
     --n_questions_per_family 3 \
-    --input_question_h5 ../data/reason/clevr_h5/clevr_train_questions.h5 \
+    --input_question_h5 ../data/reason/clevr_hyp/clevr_hyp_train_questions.h5 \
     --output_dir ../data/reason/clevr_h5
 ```
 
-2, Pretrain question parser
+2, Make sure the raw action texts are preprocessed. If you want to pre-train on a subset of actions uniformly sampled over the 90 question families, run
+```
+python tools/sample_actions.py \
+    --n_actions_per_family 3 \
+    --input_action_h5 ../data/reason/clevr_hyp/clevr_hyp_train_questions.h5 \
+    --output_dir ../data/reason/clevr_h5
+```
+
+3, Pretrain action text parser
 ```
 python tools/run_train.py \
     --checkpoint_every 200 \
     --num_iters 5000 \
     --run_dir ../data/reason/outputs/model_pretrain_uniform_270pg \
-    --clevr_train_question_path ../data/reason/clevr_h5/clevr_train_3questions_per_family.h5
+    --clevr_train_action_path ../data/reason/clevr_hyp/clevr_train_3actions_per_family.h5
 ```
 
-3, Fine-tune question parser
+4, Pretrain question parser
+```
+python tools/run_train.py \
+    --checkpoint_every 200 \
+    --num_iters 5000 \
+    --run_dir ../data/reason/outputs/model_pretrain_uniform_270pg \
+    --clevr_train_question_path ../data/reason/clevr_hyp/clevr_train_3questions_per_family.h5
+```
+
+5, Fine-tune action text parser
+```
+python tools/run_train.py \
+    --reinforce 1 \
+    --learning_rate 1e-5 \
+    --checkpoint_every 2000 \
+    --num_iters 1000000 \
+    --run_dir ../data/reason/outputs/model_reinforce_uniform_270pg \
+    --load_checkpoint_path ../data/reason/outputs/model_action_pretrain_uniform_270pg/checkpoint.pt
+```
+
+6, Fine-tune question parser
 ```
 python tools/run_train.py \
     --reinforce 1 \
@@ -222,5 +221,5 @@ python tools/run_train.py \
     --num_iters 1000000 \
     --run_dir ../data/reason/outputs/model_reinforce_uniform_270pg \
     --load_checkpoint_path ../data/reason/outputs/model_pretrain_uniform_270pg/checkpoint.pt
-```
+    
 The output models are stored in the folder `{repo_root}/data/reason/outputs/model_reinforce_uniform_270pg`.
